@@ -2,13 +2,11 @@ package com.playaround.playaroundapi.bo;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Table(name = "Account", schema = "SYS")
 public class User {
 
     @Id
