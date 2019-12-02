@@ -55,7 +55,7 @@ public class UserController {
     public ResponseEntity<?> signUp(@RequestBody SigninRequest user) throws Exception{
         User u= new User(user.getEmail(),user.getUsername(),user.getPassword());
         this.userService.createUser(u);
-        return ResponseEntity.ok(u.getId());
+        return ResponseEntity.ok(u.getUsername());
     }
 
     @RequestMapping(value = "/auth", method = RequestMethod.POST)

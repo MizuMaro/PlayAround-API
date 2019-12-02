@@ -2,6 +2,7 @@ package com.playaround.playaroundapi.bo;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,11 +13,15 @@ public class User {
 
     @Id
     @GeneratedValue
+    @Column(name="id", columnDefinition = "serial")
     private int id;
-
+    @Column(name="email")
     private String email;
+    @Column(name="username")
     private String username;
+    @Column(name="password")
     private String password;
+    @Column(name="role")
     private String role;
 
     public User(){
