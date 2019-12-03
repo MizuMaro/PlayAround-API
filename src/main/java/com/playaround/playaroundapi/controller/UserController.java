@@ -1,6 +1,6 @@
 package com.playaround.playaroundapi.controller;
 
-import com.playaround.playaroundapi.bo.User;
+import com.playaround.playaroundapi.bo.UserPA;
 import com.playaround.playaroundapi.models.AuthenticationRequest;
 import com.playaround.playaroundapi.models.AuthenticationResponse;
 import com.playaround.playaroundapi.models.SigninRequest;
@@ -31,12 +31,12 @@ public class UserController {
     }
 
     @GetMapping
-    Iterable<User> getAllUsers(){
+    Iterable<UserPA> getAllUsers(){
         return this.userService.getAllUsers();
     }
 
     @GetMapping("/{name}")
-    User getUser(@PathVariable String name){
+    UserPA getUser(@PathVariable String name){
         return this.userService.getUser(name);
     }
 
@@ -46,14 +46,14 @@ public class UserController {
     }
 
     @PostMapping
-    User createTrainer(@RequestBody User user){
+    UserPA createTrainer(@RequestBody UserPA user){
         return this.userService.createUser(user);
     }
 
 
     @RequestMapping(value = "/signin",method = RequestMethod.POST)
     public ResponseEntity<?> signUp(@RequestBody SigninRequest user) throws Exception{
-        User u= new User(user.getEmail(),user.getUsername(),user.getPassword());
+        UserPA u= new UserPA(user.getEmail(),user.getUsername(),user.getPassword());
         this.userService.createUser(u);
         return ResponseEntity.ok(u.getUsername());
     }
@@ -70,7 +70,7 @@ public class UserController {
         }
 
 
-        final User userDetail = userService.getUser(authenticationRequest.getUsername());
+        final UserPA userDetail = userService.getUser(authenticationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetail);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }

@@ -1,6 +1,7 @@
 package com.playaround.playaroundapi.util;
 
-import com.playaround.playaroundapi.bo.User;
+
+import com.playaround.playaroundapi.bo.UserPA;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -34,7 +35,7 @@ public class JwtUtil {
     private Boolean isTokenExpired(String token){
         return extractExpiration(token).before(new Date());
     }
-    public String generateToken(User userDetails){
+    public String generateToken(UserPA userDetails){
         Map<String, Object> claims = new HashMap<>();
         return createToken(claims, userDetails.getUsername());
     }
@@ -43,7 +44,7 @@ public class JwtUtil {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000*60*60*2))
                 .signWith(SignatureAlgorithm.HS256,SECRET_KEY).compact();
     }
-    public Boolean validateToken(String token, User userDetails){
+    public Boolean validateToken(String token, UserPA userDetails){
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }

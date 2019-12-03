@@ -6,12 +6,11 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "Account", schema = "SYS")
-public class User {
+@Table(name = "Account")
+public class UserPA {
 
     @Id
     @GeneratedValue
-    @Column(name="id", columnDefinition = "serial")
     private int id;
     @Column(name="email")
     private String email;
@@ -22,10 +21,10 @@ public class User {
     @Column(name="role")
     private String role;
 
-    public User(){
+    public UserPA(){
 
     }
-    public User(String email,String username, String password){
+    public UserPA(String email,String username, String password){
         this.email=email;
         this.username=username;
         this.password = password;

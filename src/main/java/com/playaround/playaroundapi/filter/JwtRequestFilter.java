@@ -1,7 +1,7 @@
 package com.playaround.playaroundapi.filter;
 
 
-import com.playaround.playaroundapi.bo.User;
+import com.playaround.playaroundapi.bo.UserPA;
 import com.playaround.playaroundapi.services.UserService;
 import com.playaround.playaroundapi.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +43,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            User userDetails = this.userDetailsService.getUser(username);
+            UserPA userDetails = this.userDetailsService.getUser(username);
 
             if (jwtUtil.validateToken(jwt, userDetails)) {
 

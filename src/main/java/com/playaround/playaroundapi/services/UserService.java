@@ -1,11 +1,11 @@
 package com.playaround.playaroundapi.services;
 
-import com.playaround.playaroundapi.bo.User;
+import com.playaround.playaroundapi.bo.UserPA;
 
 public interface UserService {
-    Iterable<User> getAllUsers();
-    User getUser(String name);
-    User createUser(User user);
+    Iterable<UserPA> getAllUsers();
+    UserPA getUser(String name);
+    UserPA createUser(UserPA user);
 
     void deleteUser(String name);
 }

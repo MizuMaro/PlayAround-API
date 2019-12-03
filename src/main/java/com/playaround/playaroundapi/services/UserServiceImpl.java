@@ -1,6 +1,6 @@
 package com.playaround.playaroundapi.services;
 
-import com.playaround.playaroundapi.bo.User;
+import com.playaround.playaroundapi.bo.UserPA;
 import com.playaround.playaroundapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,13 +22,13 @@ class UserServiceImpl implements UserDetailsService, UserService{
         this.userRepository = userRepository;
     }
 
-    public Iterable<User> getAllUsers() {
+    public Iterable<UserPA> getAllUsers() {
         return this.userRepository.findAll();
     }
 
-    public User getUser(String name) {
+    public UserPA getUser(String name) {
         var users = this.userRepository.findAll();
-        for (User u : users){
+        for (UserPA u : users){
             if(u.getUsername().equals(name)){
                 return u;
             }
@@ -37,7 +37,7 @@ class UserServiceImpl implements UserDetailsService, UserService{
         return null;
     }
 
-    public User createUser(User user) {
+    public UserPA createUser(UserPA user) {
         return this.userRepository.save(user);
     }
 
@@ -47,7 +47,7 @@ class UserServiceImpl implements UserDetailsService, UserService{
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = this.getUser(s);
+        UserPA user = this.getUser(s);
 
         UserBuilder builder = null;
         if (user != null) {

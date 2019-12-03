@@ -1,6 +1,5 @@
 package com.playaround.playaroundapi;
 
-import com.playaround.playaroundapi.bo.User;
 import com.playaround.playaroundapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
