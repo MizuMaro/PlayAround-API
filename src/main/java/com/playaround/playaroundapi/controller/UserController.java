@@ -72,7 +72,7 @@ public class UserController {
 
         final UserPA userDetail = userService.getUser(authenticationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetail);
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetail));
     }
 
 
