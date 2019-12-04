@@ -4,6 +4,7 @@ import com.playaround.playaroundapi.bo.UserPA;
 import com.playaround.playaroundapi.models.AuthenticationRequest;
 import com.playaround.playaroundapi.models.AuthenticationResponse;
 import com.playaround.playaroundapi.models.SigninRequest;
+import com.playaround.playaroundapi.models.SigninResponse;
 import com.playaround.playaroundapi.services.UserService;
 import com.playaround.playaroundapi.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,8 +56,8 @@ public class UserController {
     @RequestMapping(value = "/signin",method = RequestMethod.POST)
     public ResponseEntity<?> signUp(@RequestBody SigninRequest user) throws Exception{
         UserPA u= new UserPA(user.getEmail(),user.getUsername(),user.getPassword());
-        this.userService.createUser(u);
-        return ResponseEntity.ok(u.getUsername());
+        u = this.userService.createUser(u);
+        return ResponseEntity.ok(new SigninResponse(u.getId(),u.getUsername()));
     }
 
     @RequestMapping(value = "/auth", method = RequestMethod.POST)
