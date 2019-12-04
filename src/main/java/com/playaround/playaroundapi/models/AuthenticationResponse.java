@@ -20,6 +20,18 @@ public class AuthenticationResponse implements Serializable {
 
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
     public String getJwt() {
         return jwt;
     }
