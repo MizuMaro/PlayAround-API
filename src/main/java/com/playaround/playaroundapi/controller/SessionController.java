@@ -60,7 +60,7 @@ public class SessionController {
             session.setLimit(sessionRequest.getLimit());
             session.setType(sessionRequest.getType());
             session.setPlace(sessionRequest.getPlace());
-            session = this.sessionService.createSession(session);
+            session = this.sessionService.updateSession(session);
             return ResponseEntity.ok(new UpdateSessionResponse(session.getId(), session.getName()));
         }else{
             return (ResponseEntity<?>) ResponseEntity.badRequest();
