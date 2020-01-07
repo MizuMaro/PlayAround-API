@@ -4,6 +4,8 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Account")
@@ -20,9 +22,31 @@ public class UserPA {
     private String password;
     @Column(name="role")
     private String role;
+    @Column(name="bio")
+    private String bio;
+    @Column(name = "birthDate")
+    private Date birthDate;
+    @Column(name = "location")
+    private String location;
+    @ElementCollection
+    @Column(name = "gamefavorites")
+    private List<Integer> games;
+    @ElementCollection
+    @Column(name = "boardGamefavorites")
+    private List<Integer> boardGames;
+    @ElementCollection
+    @Column(name = "TCGamefavorites")
+    private List<Integer> TCGames;
+    @Column(name = "userImage")
+    private String imageUrl;
+    @ElementCollection
+    @Column(name = "friends")
+    private List<Integer> friendIds;
+    @ElementCollection
+    @Column(name = "communities")
+    private List<Integer> commuIds;
 
     public UserPA(){
-
     }
     public UserPA(String email,String username, String password){
         this.email=email;

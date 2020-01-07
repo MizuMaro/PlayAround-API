@@ -13,15 +13,16 @@ public class SessionServiceImpl implements SessionService {
     private SessionRepository sessionRepository;
 
     @Autowired
-    public SessionServiceImpl(SessionRepository sessionRepository){ this.sessionRepository= sessionRepository;}
+    public SessionServiceImpl(SessionRepository sessionRepository){
+        this.sessionRepository= sessionRepository;}
 
 
     @Override
     public Iterable<SessionPA> getAllSessions() { return this.sessionRepository.findAll(); }
 
     @Override
-    public void createSession(SessionPA session) {
-
+    public SessionPA createSession(SessionPA session) {
+        return this.sessionRepository.save(session);
     }
 
     @Override
@@ -37,7 +38,13 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public void deleteSession(String id) {
+    public SessionPA updateSession(SessionPA session) {
+        this.sessionRepository.deleteById(session.getId());
+        return this.sessionRepository.save(session);
+    }
 
+    @Override
+    public void deleteSession(int id) {
+        this.sessionRepository.deleteById(id);
     }
 }

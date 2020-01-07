@@ -19,7 +19,7 @@ public class JwtUtil {
 
     private String SECRET_KEY = "playAroundSecretKey";
 
-    public String extractUsername(String token){
+    public String extractUserId(String token){
         return extractClaim(token, Claims::getSubject);
     }
     public Date extractExpiration(String token){
@@ -37,7 +37,7 @@ public class JwtUtil {
     }
     public String generateToken(UserPA userDetails){
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userDetails.getUsername());
+        return createToken(claims, userDetails.getId()+"");
     }
     private  String createToken (Map<String,Object> claims, String subject){
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
@@ -45,7 +45,7 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS256,SECRET_KEY).compact();
     }
     public Boolean validateToken(String token, UserPA userDetails){
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        final String id = extractUserId(token);
+        return (id.equals(userDetails.getId()+"") && !isTokenExpired(token));
     }
 }

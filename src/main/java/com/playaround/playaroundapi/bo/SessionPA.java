@@ -5,27 +5,49 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "Session")
+@Table(name = "PA_Session")
 public class SessionPA {
 
     @Id
     @GeneratedValue
     private int id;
-    @Column(name="userIdCreator")
+    @Column(name="author")
     private String userId;
     @Column(name="name")
     private String name;
     @Column(name="game")
-    private String game;
+    private String gameId;
+    @Column(name = "image")
+    private String imageUrl;
     @Column(name="date")
     private Date date;
     @Column(name = "place")
     private String place;
     @Column(name = "visibility")
     private boolean visibility;
+    @Column(name = "limitation")
+    private String limitation;
+    @Column(name = "types")
+    private String type;
     @ElementCollection
     @Column(name = "participants")
     private List<Integer> ids;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getLimit() {
+        return limitation;
+    }
+
+    public void setLimit(String limit) {
+        this.limitation = limit;
+    }
 
     public int getId() {
         return id;
@@ -52,11 +74,11 @@ public class SessionPA {
     }
 
     public String getGame() {
-        return game;
+        return gameId;
     }
 
     public void setGame(String game) {
-        this.game = game;
+        this.gameId = game;
     }
 
     public Date getDate() {
@@ -91,6 +113,34 @@ public class SessionPA {
         this.ids = ids;
     }
 
+    public String getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public SessionPA() {
+    }
+
+    public SessionPA(String author, String name, String gameId, Date date, String place, boolean visibility, String limit, String type ) {
+        this.name = name;
+        this.userId = author ;
+        this.gameId = gameId;
+        this.date= date;
+        this.place= place;
+        this.visibility= visibility;
+        this.limitation = limit;
+        this.type = type;
+        this.imageUrl= "";
     }
 }

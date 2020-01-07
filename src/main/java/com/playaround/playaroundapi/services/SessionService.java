@@ -5,8 +5,9 @@ import com.playaround.playaroundapi.bo.SessionPA;
 public interface SessionService {
 
     Iterable<SessionPA> getAllSessions();
-    void createSession(SessionPA session);
+    SessionPA createSession(SessionPA session);
     SessionPA getSession(int id);
+    SessionPA updateSession(SessionPA session);
     void deleteSession(int id);
 
 }

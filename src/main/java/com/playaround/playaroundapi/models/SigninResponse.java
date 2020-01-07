@@ -10,7 +10,7 @@ public class SigninResponse implements Serializable {
     private final String username;
     private final int id;
 
-    public SigninResponse(int id,String username) {
+    public SigninResponse(int  id,String username) {
         this.id = id;
         this.username = username;
 
