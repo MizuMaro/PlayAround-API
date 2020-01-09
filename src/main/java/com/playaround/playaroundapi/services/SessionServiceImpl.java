@@ -4,8 +4,12 @@ import com.playaround.playaroundapi.bo.SessionPA;
 import com.playaround.playaroundapi.bo.UserPA;
 import com.playaround.playaroundapi.repository.SessionRepository;
 import com.playaround.playaroundapi.repository.UserRepository;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SessionServiceImpl implements SessionService {
@@ -37,9 +41,18 @@ public class SessionServiceImpl implements SessionService {
         return null;
     }
 
+    public List<Integer> getUserSessions(int id){
+        List<Integer> list = new ArrayList<>();
+        for(SessionPA sessionPA : this.getAllSessions()){
+            if(sessionPA.getIds().contains(id)){
+                list.add(sessionPA.getId());
+            }
+        }
+        return list;
+    }
+
     @Override
     public SessionPA updateSession(SessionPA session) {
-        this.sessionRepository.deleteById(session.getId());
         return this.sessionRepository.save(session);
     }
 

@@ -30,10 +30,12 @@ public class SessionController {
         return this.sessionService.getAllSessions();
     }
 
-    @GetMapping("/{sessionId}")
+    @GetMapping("/sessionDetail/{sessionId}")
     SessionPA getSession(@PathVariable String id){
         return this.sessionService.getSession(Integer.parseInt(id));
     }
+
+
     @RequestMapping(value = "/newSession",method = RequestMethod.POST)
     public ResponseEntity<?> addSession(@RequestBody NewSessionRequest sessionRequest) throws Exception{
         SessionPA session = new SessionPA(sessionRequest.getAuthor(),sessionRequest.getName(),
@@ -67,6 +69,18 @@ public class SessionController {
         }
     }
 
+    @RequestMapping(value = "/joinSession", method =  RequestMethod.POST)
+    public ResponseEntity<?> joinSession(@RequestBody JoinSessionRequest joinSessionRequest){
+        String userId = jwtTokenUtil.extractUserId(joinSessionRequest.getToken());
+        SessionPA sessionPA = sessionService.getSession(joinSessionRequest.getId());
+        List<Integer> list= sessionPA.getIds();
+        list.add(Integer.parseInt(userId));
+        sessionPA.setIds(list);
+        sessionService.updateSession(sessionPA);
+        return ResponseEntity.ok(new UpdateSessionResponse(sessionPA.getId(),sessionPA.getName()));
+
+    }
+
     @DeleteMapping("/delete")
     void deleteSession(@RequestBody DeleteSessionRequest deleteSessionRequest) throws  Exception {
         String userId = jwtTokenUtil.extractUserId(deleteSessionRequest.getToken());
@@ -76,4 +90,17 @@ public class SessionController {
         }
     }
 
+    @GetMapping(value = "/getUserSessions")
+    Iterable<SessionPA> getAllSessions(@RequestBody GetTokenRequest getTokenRequest){
+        List<Integer> result = this.sessionService.getUserSessions(
+                Integer.parseInt(
+                        jwtTokenUtil.extractUserId(
+                                getTokenRequest.getToken()
+                        )));
+        List<SessionPA> sessions = new ArrayList<>();
+        for (int id : result){
+            sessions.add(this.sessionService.getSession(id));
+        }
+        return sessions;
+    }
 }
