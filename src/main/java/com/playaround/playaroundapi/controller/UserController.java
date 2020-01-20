@@ -1,10 +1,7 @@
 package com.playaround.playaroundapi.controller;
 
 import com.playaround.playaroundapi.bo.UserPA;
-import com.playaround.playaroundapi.models.AuthenticationRequest;
-import com.playaround.playaroundapi.models.AuthenticationResponse;
-import com.playaround.playaroundapi.models.SigninRequest;
-import com.playaround.playaroundapi.models.SigninResponse;
+import com.playaround.playaroundapi.models.*;
 import com.playaround.playaroundapi.services.UserService;
 import com.playaround.playaroundapi.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(path = "/users")
 public class UserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserService userService;
@@ -38,8 +36,13 @@ public class UserController {
     }
 
     @GetMapping("/{name}")
-    UserPA getUser(@PathVariable String name){
-        return this.userService.getUser(name);
+    UserPaDetailResponse getUser(@PathVariable String name){
+        return new UserPaDetailResponse(this.userService.getUser(name));
+    }
+
+    @GetMapping("/userInfo")
+    UserPaDetailResponse getUserWithToken(@RequestBody GetTokenRequest token){
+        return new UserPaDetailResponse(this.userService.getUserbyId(jwtTokenUtil.extractUserId(token.getToken())));
     }
 
     @DeleteMapping("/{name}")
@@ -76,6 +79,7 @@ public class UserController {
         final String jwt = jwtTokenUtil.generateToken(userDetail);
         return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetail));
     }
+
 
 
 

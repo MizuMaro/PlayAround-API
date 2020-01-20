@@ -37,6 +37,17 @@ class UserServiceImpl implements UserDetailsService, UserService{
         return null;
     }
 
+    @Override
+    public UserPA getUserbyId(String name) {
+        var users = this.userRepository.findAll();
+        for (UserPA u : users){
+            if((u.getId()+"").equals(name)){
+                return u;
+            }
+        }
+        return null;
+    }
+
     public UserPA createUser(UserPA user) {
         return this.userRepository.save(user);
     }

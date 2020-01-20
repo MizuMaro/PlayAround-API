@@ -1,57 +1,67 @@
-package com.playaround.playaroundapi.bo;
+package com.playaround.playaroundapi.models;
 
-import org.springframework.security.core.GrantedAuthority;
+import com.playaround.playaroundapi.bo.UserPA;
 
-import javax.persistence.*;
-import java.util.Collection;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "Account")
-public class UserPA {
-
-    @Id
-    @GeneratedValue
-    private int id;
-    @Column(name="email")
+public class UserPaDetailResponse {
     private String email;
-    @Column(name="username")
     private String username;
-    @Column(name="password")
-    private String password;
-    @Column(name="role")
     private String role;
-    @Column(name="bio")
     private String bio;
-    @Column(name = "birthDate")
     private Date birthDate;
-    @Column(name = "location")
     private String location;
-    @ElementCollection
-    @Column(name = "gamefavorites")
     private List<Integer> games;
-    @ElementCollection
-    @Column(name = "boardGamefavorites")
     private List<Integer> boardGames;
-    @ElementCollection
-    @Column(name = "TCGamefavorites")
     private List<Integer> TCGames;
-    @Column(name = "userImage")
     private String imageUrl;
-    @ElementCollection
-    @Column(name = "friends")
     private List<Integer> friendIds;
-    @ElementCollection
-    @Column(name = "communities")
     private List<Integer> commuIds;
 
-    public UserPA(){
+    public UserPaDetailResponse(UserPA user){
+        this.email = user.getEmail();
+        this.username = user.getUsername();
+        this.role = user.getRole();
+        this.bio = user.getBio();
+        this.birthDate = user.getBirthDate();
+        this.location = user.getLocation();
+        this.games = user.getGames();
+        this.boardGames = user.getBoardGames();
+        this.TCGames = user.getTCGames();
+        this.imageUrl = user.getImageUrl();
+        this.friendIds = user.getFriendIds();
+        this.commuIds = user.getCommuIds();
+
     }
-    public UserPA(String email,String username, String password){
-        this.email=email;
-        this.username=username;
-        this.password = password;
+
+    public UserPaDetailResponse() {
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getBio() {
@@ -124,45 +134,5 @@ public class UserPA {
 
     public void setCommuIds(List<Integer> commuIds) {
         this.commuIds = commuIds;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String login) {
-        this.username = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }
