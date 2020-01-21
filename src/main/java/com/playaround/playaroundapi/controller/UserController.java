@@ -41,8 +41,8 @@ public class UserController {
     }
 
     @GetMapping("/userInfo")
-    UserPaDetailResponse getUserWithToken(@RequestBody GetTokenRequest token){
-        return new UserPaDetailResponse(this.userService.getUserbyId(jwtTokenUtil.extractUserId(token.getToken())));
+    UserPaDetailResponse getUserWithToken(@RequestHeader(name="token") String token){
+        return new UserPaDetailResponse(this.userService.getUserbyId(jwtTokenUtil.extractUserId(token)));
     }
 
     @DeleteMapping("/{name}")
