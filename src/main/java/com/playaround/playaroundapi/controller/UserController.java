@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,6 +61,19 @@ public class UserController {
         u = this.userService.createUser(u);
         return ResponseEntity.ok(new SigninResponse(u.getId(),u.getUsername()));
     }
+
+
+    @RequestMapping(value = "/updateProfile",method = RequestMethod.POST)
+    public ResponseEntity<?> updateProfile(@RequestHeader(name="token") String token, @RequestBody UpdateUserInfoRequest user) throws Exception{
+        UserPA u= this.userService.getUserbyId(jwtTokenUtil.extractUserId(token));
+        u.setBio(user.getBio());
+        u.setBirthDate(user.getBirthDate());
+        u.setImageUrl(user.getImageUrl());
+        u.setLocation(user.getLocation());
+        this.userService.updateUser(u);
+        return ResponseEntity.ok(new SigninResponse(u.getId(),u.getUsername()));
+    }
+
 
     @RequestMapping(value = "/auth", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthentificationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{

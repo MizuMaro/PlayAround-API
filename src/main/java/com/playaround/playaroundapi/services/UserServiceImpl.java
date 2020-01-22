@@ -52,6 +52,11 @@ class UserServiceImpl implements UserDetailsService, UserService{
         return this.userRepository.save(user);
     }
 
+    @Override
+    public UserPA updateUser(UserPA user) {
+        return this.userRepository.save(user);
+    }
+
     public void deleteUser(String name) {
         this.userRepository.deleteById(name);
     }

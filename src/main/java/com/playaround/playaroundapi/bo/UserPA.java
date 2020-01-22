@@ -3,6 +3,7 @@ package com.playaround.playaroundapi.bo;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -52,6 +53,15 @@ public class UserPA {
         this.email=email;
         this.username=username;
         this.password = password;
+        this.commuIds = new ArrayList<>();
+        this.friendIds = new ArrayList<>();
+        this.games = new ArrayList<>();
+        this.boardGames = new ArrayList<>();
+        this.TCGames = new ArrayList<>();
+        this.bio = "";
+        this.location = "";
+        this.birthDate = new Date();
+        this.role = "user";
     }
 
     public String getBio() {
