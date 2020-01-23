@@ -91,12 +91,10 @@ public class SessionController {
     }
 
     @GetMapping(value = "/getUserSessions")
-    Iterable<SessionPA> getAllSessions(@RequestBody GetTokenRequest getTokenRequest){
+    Iterable<SessionPA> getAllSessions(@RequestHeader(name="token") String token){
         List<Integer> result = this.sessionService.getUserSessions(
                 Integer.parseInt(
-                        jwtTokenUtil.extractUserId(
-                                getTokenRequest.getToken()
-                        )));
+                        jwtTokenUtil.extractUserId(token)));
         List<SessionPA> sessions = new ArrayList<>();
         for (int id : result){
             sessions.add(this.sessionService.getSession(id));
