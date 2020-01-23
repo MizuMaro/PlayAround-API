@@ -81,6 +81,27 @@ public class SessionController {
 
     }
 
+
+    @RequestMapping(value = "/quitSession", method =  RequestMethod.POST)
+    public ResponseEntity<?> quitSession(@RequestBody JoinSessionRequest joinSessionRequest){
+        String userId = jwtTokenUtil.extractUserId(joinSessionRequest.getToken());
+        SessionPA sessionPA = sessionService.getSession(joinSessionRequest.getId());
+        List<Integer> list= sessionPA.getIds();
+        if(list.contains(Integer.parseInt(userId))){
+
+            int i = list.indexOf(Integer.parseInt(userId));
+            list.remove(i);
+            sessionPA.setIds(list);
+            sessionService.updateSession(sessionPA);
+            return ResponseEntity.ok(new UpdateSessionResponse(sessionPA.getId(),sessionPA.getName()));
+        }
+        else {
+            return (ResponseEntity<?>) ResponseEntity.badRequest();
+        }
+
+    }
+
+
     @DeleteMapping("/delete")
     void deleteSession(@RequestBody DeleteSessionRequest deleteSessionRequest) throws  Exception {
         String userId = jwtTokenUtil.extractUserId(deleteSessionRequest.getToken());
