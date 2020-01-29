@@ -9,11 +9,20 @@ public class NewSessionRequest implements Serializable {
     private String author;
     private String name;
     private String gameId;
+    private String imageUrl;
     private Date date;
     private String place;
     private boolean visibility;
     private String limit;
     private String type;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public String getAuthor() {
         return author;
@@ -90,10 +99,11 @@ public class NewSessionRequest implements Serializable {
         this.token = token;
     }
 
-    public NewSessionRequest(String token, String author, String name, String gameId, Date date, String place, boolean visibility, String limit, String type) {
+    public NewSessionRequest(String token, String author, String name, String gameId,String imageUrl, Date date, String place, boolean visibility, String limit, String type) {
         this.setAuthor(author);
         this.setName(name);
         this.setGameId(gameId);
+        this.setImageUrl(imageUrl);
         this.setDate(date);
         this.setPlace(place);
         this.setVisibility(visibility);
