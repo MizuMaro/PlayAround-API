@@ -39,7 +39,7 @@ public class SessionController {
     @RequestMapping(value = "/newSession",method = RequestMethod.POST)
     public ResponseEntity<?> addSession(@RequestBody NewSessionRequest sessionRequest) throws Exception{
         SessionPA session = new SessionPA(sessionRequest.getAuthor(),sessionRequest.getName(),
-                sessionRequest.getGameId(),sessionRequest.getDate(),sessionRequest.getPlace(),
+                sessionRequest.getGameId(),sessionRequest.getImageUrl(),sessionRequest.getDate(),sessionRequest.getPlace(),
                 sessionRequest.isVisibility(),sessionRequest.getLimit(), sessionRequest.getType() );
         List<Integer> ids = new ArrayList<>();
         ids.add(Integer.parseInt(session.getUserId()));

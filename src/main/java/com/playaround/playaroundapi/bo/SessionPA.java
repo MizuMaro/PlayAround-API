@@ -132,7 +132,7 @@ public class SessionPA {
     public SessionPA() {
     }
 
-    public SessionPA(String author, String name, String gameId, Date date, String place, boolean visibility, String limit, String type ) {
+    public SessionPA(String author, String name, String gameId,String imageUrl, Date date, String place, boolean visibility, String limit, String type ) {
         this.name = name;
         this.userId = author ;
         this.gameId = gameId;
@@ -141,6 +141,6 @@ public class SessionPA {
         this.visibility= visibility;
         this.limitation = limit;
         this.type = type;
-        this.imageUrl= "";
+        this.imageUrl= imageUrl;
     }
 }
