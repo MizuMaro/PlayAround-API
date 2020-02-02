@@ -73,11 +73,17 @@ public class SessionController {
     public ResponseEntity<?> joinSession(@RequestBody JoinSessionRequest joinSessionRequest){
         String userId = jwtTokenUtil.extractUserId(joinSessionRequest.getToken());
         SessionPA sessionPA = sessionService.getSession(joinSessionRequest.getId());
-        List<Integer> list= sessionPA.getIds();
-        list.add(Integer.parseInt(userId));
-        sessionPA.setIds(list);
-        sessionService.updateSession(sessionPA);
-        return ResponseEntity.ok(new UpdateSessionResponse(sessionPA.getId(),sessionPA.getName()));
+        if(Integer.parseInt(sessionPA.getLimit())> sessionPA.getIds().size()) {
+            List<Integer> list = sessionPA.getIds();
+            list.add(Integer.parseInt(userId));
+            sessionPA.setIds(list);
+            sessionService.updateSession(sessionPA);
+            return ResponseEntity.ok(new UpdateSessionResponse(sessionPA.getId(), sessionPA.getName()));
+        }
+        else{
+            return (ResponseEntity<?>)ResponseEntity.status(350);
+
+        }
 
     }
 
