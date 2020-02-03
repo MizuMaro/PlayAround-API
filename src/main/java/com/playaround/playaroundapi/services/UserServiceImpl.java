@@ -60,6 +60,8 @@ class UserServiceImpl implements UserDetailsService, UserService{
     @Override
     public void addGameToFavorites(UserPA user, String gameId) {
         user.getGames().add(gameId);
+
+        this.updateUser(user);
     }
 
     @Override
