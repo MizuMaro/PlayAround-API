@@ -31,13 +31,13 @@ public class UserPA {
     private String location;
     @ElementCollection
     @Column(name = "gamefavorites")
-    private List<Integer> games;
+    private List<String> games;
     @ElementCollection
     @Column(name = "boardGamefavorites")
-    private List<Integer> boardGames;
+    private List<String> boardGames;
     @ElementCollection
     @Column(name = "TCGamefavorites")
-    private List<Integer> TCGames;
+    private List<String> TCGames;
     @Column(name = "userImage")
     private String imageUrl;
     @ElementCollection
@@ -88,27 +88,27 @@ public class UserPA {
         this.location = location;
     }
 
-    public List<Integer> getGames() {
+    public List<String> getGames() {
         return games;
     }
 
-    public void setGames(List<Integer> games) {
+    public void setGames(List<String> games) {
         this.games = games;
     }
 
-    public List<Integer> getBoardGames() {
+    public List<String> getBoardGames() {
         return boardGames;
     }
 
-    public void setBoardGames(List<Integer> boardGames) {
+    public void setBoardGames(List<String> boardGames) {
         this.boardGames = boardGames;
     }
 
-    public List<Integer> getTCGames() {
+    public List<String> getTCGames() {
         return TCGames;
     }
 
-    public void setTCGames(List<Integer> TCGames) {
+    public void setTCGames(List<String> TCGames) {
         this.TCGames = TCGames;
     }
 

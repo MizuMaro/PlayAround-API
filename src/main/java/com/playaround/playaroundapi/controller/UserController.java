@@ -12,6 +12,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/users")
 public class UserController {
@@ -90,6 +92,27 @@ public class UserController {
         final UserPA userDetail = userService.getUser(authenticationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetail);
         return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetail));
+    }
+
+    @RequestMapping(value = "/addToFav", method = RequestMethod.POST)
+    void addToFavoriteGames(@RequestHeader(name = "token") String token, @RequestBody FavoriteGamesRequest request){
+        UserPA u = this.userService.getUserbyId(jwtTokenUtil.extractUserId(token));
+
+        this.userService.addGameToFavorites(u, request.getGameId());
+    }
+
+    @RequestMapping(value = "/removeFromFav", method = RequestMethod.DELETE)
+    void removeFromFavoriteGames(@RequestHeader(name = "token") String token, @RequestBody FavoriteGamesRequest request){
+        UserPA u = this.userService.getUserbyId(jwtTokenUtil.extractUserId(token));
+
+        this.userService.removeGameFromFavorites(u, request.getGameId());
+    }
+
+    @RequestMapping(value = "/getAllFavoriteGames", method = RequestMethod.GET)
+    List<String> getAllFavoriteGames(@RequestHeader(name = "token") String token){
+        UserPA u = this.userService.getUserbyId(jwtTokenUtil.extractUserId(token));
+
+        return this.userService.getAllFavoriteGames(u);
     }
 
 

@@ -57,6 +57,22 @@ class UserServiceImpl implements UserDetailsService, UserService{
         return this.userRepository.save(user);
     }
 
+    @Override
+    public void addGameToFavorites(UserPA user, String gameId) {
+        user.getGames().add(gameId);
+    }
+
+    @Override
+    public List<String> getAllFavoriteGames(UserPA user) {
+        return user.getGames();
+    }
+
+    @Override
+    public void removeGameFromFavorites(UserPA user, String gameId) {
+        user.getGames().remove(Integer.parseInt(gameId));
+    }
+
+
     public void deleteUser(String name) {
         this.userRepository.deleteById(name);
     }

@@ -14,9 +14,9 @@ public class UserPaDetailResponse {
     private String bio;
     private Date birthDate;
     private String location;
-    private List<Integer> games;
-    private List<Integer> boardGames;
-    private List<Integer> TCGames;
+    private List<String> games;
+    private List<String> boardGames;
+    private List<String> TCGames;
     private String imageUrl;
     private List<Integer> friendIds;
     private List<Integer> commuIds;
@@ -88,27 +88,27 @@ public class UserPaDetailResponse {
         this.location = location;
     }
 
-    public List<Integer> getGames() {
+    public List<String> getGames() {
         return games;
     }
 
-    public void setGames(List<Integer> games) {
+    public void setGames(List<String> games) {
         this.games = games;
     }
 
-    public List<Integer> getBoardGames() {
+    public List<String> getBoardGames() {
         return boardGames;
     }
 
-    public void setBoardGames(List<Integer> boardGames) {
+    public void setBoardGames(List<String> boardGames) {
         this.boardGames = boardGames;
     }
 
-    public List<Integer> getTCGames() {
+    public List<String> getTCGames() {
         return TCGames;
     }
 
-    public void setTCGames(List<Integer> TCGames) {
+    public void setTCGames(List<String> TCGames) {
         this.TCGames = TCGames;
     }
 
