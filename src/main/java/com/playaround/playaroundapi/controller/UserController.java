@@ -99,6 +99,7 @@ public class UserController {
         UserPA u = this.userService.getUserbyId(jwtTokenUtil.extractUserId(token));
 
         this.userService.addGameToFavorites(u, request.getGameId());
+        this.userService.updateUser(u);
     }
 
     @RequestMapping(value = "/removeFromFav", method = RequestMethod.DELETE)
