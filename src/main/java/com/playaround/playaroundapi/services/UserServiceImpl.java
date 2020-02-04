@@ -69,7 +69,9 @@ class UserServiceImpl implements UserDetailsService, UserService{
 
     @Override
     public void removeGameFromFavorites(UserPA user, String gameId) {
-        user.getGames().remove(Integer.parseInt(gameId));
+        if(user.getGames().contains(gameId)){
+            user.getGames().remove(gameId);
+        }
     }
 
 
