@@ -75,6 +75,9 @@ public class SessionController {
         SessionPA sessionPA = sessionService.getSession(joinSessionRequest.getId());
         if(Integer.parseInt(sessionPA.getLimit())> sessionPA.getIds().size()) {
             List<Integer> list = sessionPA.getIds();
+            if(list.contains(Integer.parseInt(userId))){
+                return (ResponseEntity<?>)ResponseEntity.status(350);
+            }
             list.add(Integer.parseInt(userId));
             sessionPA.setIds(list);
             sessionService.updateSession(sessionPA);
